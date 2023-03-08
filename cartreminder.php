@@ -162,8 +162,19 @@ class CartReminder extends \Module
                         '{products_cart}' => $tpl_products_cart,
                         '{order_url}' => $this->context->link->getPageLink('order')
                     );
-                    $email['email'] = 'contact@adilis.fr';
-                    Mail::Send((int)$email['id_lang'], 'followup_1_voucher', Mail::l('Your cart and your discount', (int)$email['id_lang']), $template_vars, $email['email'], $email['firstname'].' '.$email['lastname'], null, null, null, null, dirname(__FILE__).'/mails/');
+                    Mail::Send(
+                        (int)$email['id_lang'],
+                        'followup_1_voucher',
+                        $this->l('Your cart and your discount', false, \Language::getIsoById((int)$email['id_lang'])),
+                        $template_vars,
+                        $email['email'],
+                        $email['firstname'].' '.$email['lastname'],
+                        null,
+                        null,
+                        null,
+                        null,
+                        dirname(__FILE__).'/mails/'
+                    );
                     $this->logEmail((int)$voucher->id, (int)$email['id_customer'], (int)$email['id_cart']);
                 }
             } else {
@@ -174,8 +185,19 @@ class CartReminder extends \Module
                     '{products_cart}' => $tpl_products_cart,
                     '{order_url}' => $this->context->link->getPageLink('order')
                 );
-                $email['email'] = 'contact@adilis.fr';
-                Mail::Send((int)$email['id_lang'], 'followup_1_no_voucher', Mail::l('Your cart', (int)$email['id_lang']), $template_vars, $email['email'], $email['firstname'].' '.$email['lastname'], null, null, null, null, dirname(__FILE__).'/mails/');
+                Mail::Send(
+                    (int)$email['id_lang'],
+                    'followup_1_no_voucher',
+                    $this->l('Your cart', false, \Language::getIsoById((int)$email['id_lang'])),
+                    $template_vars,
+                    $email['email'],
+                    $email['firstname'].' '.$email['lastname'],
+                    null,
+                    null,
+                    null,
+                    null,
+                    dirname(__FILE__).'/mails/'
+                );
                 $this->logEmail(0, (int)$email['id_customer'], (int)$email['id_cart']);
             }
         }
@@ -222,7 +244,7 @@ class CartReminder extends \Module
                     'title' => $this->l('Information'),
                     'icon' => 'icon-cogs',
                 ),
-                'description' => $this->l('Four kinds of e-mail alerts are available in order to stay in touch with your customers!').'<br />'.$cron_info,
+                'description' => $cron_info,
             )
         );
 
