@@ -24,7 +24,6 @@ class CartReminderCronModuleFrontController extends ModuleFrontController
      */
     public function postProcess()
     {
-        Db::getInstance()->execute('TRUNCATE TABLE `' . _DB_PREFIX_ . 'log_email`');
         if (Tools::getIsset('secure_key')) {
             $secure_key = Configuration::get('PS_FOLLOWUP_SECURE_KEY');
             if (!empty($secure_key) && $secure_key === Tools::getValue('secure_key')) {
